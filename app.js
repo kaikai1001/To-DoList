@@ -1,10 +1,16 @@
 const express = require('express')
 const mongoose = require('mongoose')
+const exphdb = require('express-handlebars')
 const app = express()
+
+app.engine('hbs',exphdb({defaultLayout: 'main',extname: '.hbs'}))
+app.set('view engine','hbs')
+
 // 加入這段 code, 僅在非正式環境時, 使用 dotenv
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
+
 //process.env.MONGODB_URI
 mongoose.connect('mongodb+srv://alpha:camp@cluster0.rdlqvcs.mongodb.net/todo-list?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -20,7 +26,7 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-  res.send('hello world')
+  res.render('index')
 })
 
 app.listen(3000, () => {
