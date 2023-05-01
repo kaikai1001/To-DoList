@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 //process.env.MONGODB_URI
-mongoose.connect('mongodb+srv://alpha:camp@cluster0.rdlqvcs.mongodb.net/todo-list?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
 // 取得資料庫連線狀態
 const db = mongoose.connection
